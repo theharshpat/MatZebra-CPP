@@ -204,3 +204,14 @@ int main()
 */
     return 0;
 }
+
+/* TODO
+Slicing
+Scalar multiplication/addition/sub operator syntax
+Matrix multiplication/addition/sub operator syntax
+Determinant value
+Inverse of matrix
+Transpose of matrix
+division operations based on : A/B = A × (1/B) = A × B^(-1)
+solving system of equations
+*/
