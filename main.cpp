@@ -182,15 +182,20 @@ public:
         }
         matrix = tempVec;
     }
+
+    bool operator == (const Matrix& arg)
+    {
+        return this->matrix==arg.matrix;
+    }  
 };
 
 int main()
 {
     Matrix m({{2, 4}, {3, 4}});
-    m.printMatrix();
-    vector<vector<int>> vec = {{1, 2}, {1, 3}};
-    m.multiplyMatrix(vec);
-    m.printMatrix();
+    Matrix m2({{2, 4}, {3, 4}});
+    Matrix m3({{2, 4}, {3, 5}});
+    cout<<(m==m2)<<"\n";
+    cout<<(m==m3)<<"\n";
     /*
 {
   { 2, 4 },
