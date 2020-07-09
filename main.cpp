@@ -157,6 +157,14 @@ public:
         matrix = tempVec;
     }
 
+    void multiplyMatrix(int &value)
+    {
+        for(auto&vec:matrix)
+        {
+            for(auto&num:vec)num*=value;
+        }
+    }
+
     bool isEqual(const Matrix &arg)
     {
         return this->matrix == arg.matrix;
@@ -179,15 +187,19 @@ public:
 
 int main()
 {
-    Matrix m;
-    m.setIdentity(4);
+    Matrix m({{1,1,1},{1,2,3}});
+    m.printMatrix();
+    int v=3;
+    m.multiplyMatrix(v);
     m.printMatrix();
 /*
 {
-  { 1, 0, 0, 0 },
-  { 0, 1, 0, 0 },
-  { 0, 0, 1, 0 },
-  { 0, 0, 0, 1 }
+  { 1, 1, 1 },
+  { 1, 2, 3 }
+}
+{
+  { 3, 3, 3 },
+  { 3, 6, 9 }
 }
 */
     return 0;
