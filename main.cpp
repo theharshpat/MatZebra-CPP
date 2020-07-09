@@ -11,6 +11,8 @@ public:
 
     Matrix(vector<vector<int>> matrix) : matrix(matrix) {}
 
+    Matrix(const Matrix &arg) : matrix(arg.matrix) {}
+
     ~Matrix() {}
 
     void setMatrix(vector<vector<int>> &matrix)
@@ -192,18 +194,23 @@ public:
 int main()
 {
     Matrix m({{2, 4}, {3, 4}});
-    Matrix m2({{2, 4}, {3, 4}});
-    Matrix m3({{2, 4}, {3, 5}});
-    cout<<(m==m2)<<"\n";
-    cout<<(m==m3)<<"\n";
+    Matrix m2(m);
+    Matrix m3=m;
+    m.printMatrix();
+    m2.printMatrix();
+    m3.printMatrix();
     /*
 {
   { 2, 4 },
   { 3, 4 }
 }
 {
-  { 6, 16 },
-  { 7, 18 }
+  { 2, 4 },
+  { 3, 4 }
+}
+{
+  { 2, 4 },
+  { 3, 4 }
 }
 */
     return 0;
