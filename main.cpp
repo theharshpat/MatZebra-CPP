@@ -9,15 +9,20 @@ private:
 public:
     Matrix() {}
 
-    Matrix(vector<vector<int>> matrix) : matrix(matrix) {}
-
     Matrix(const Matrix &arg) : matrix(arg.matrix) {}
+
+    Matrix(vector<vector<int>> arg) : matrix(arg) {}
 
     ~Matrix() {}
 
-    void setMatrix(vector<vector<int>> &matrix)
+    void setMatrix(Matrix &arg)
     {
-        this->matrix = matrix;
+        this->matrix = arg.matrix;
+    }
+
+    void setMatrix(vector<vector<int>> &arg)
+    {
+        this->matrix = arg;
     }
 
     vector<vector<int>> getMatrix()
@@ -28,7 +33,7 @@ public:
     void inputMatrix()
     {
         int rowSize, colSize;
-        cout<<"Enter row and col size, enter data row wise\n";
+        cout << "Enter row and col size, enter data row wise\n";
         cin >> rowSize >> colSize;
         matrix.resize(rowSize, vector<int>(colSize));
         for (auto &row : matrix)
@@ -90,9 +95,9 @@ public:
         }
     }
 
-    //Overloaded
-    void addMatrix(vector<vector<int>> &arg)
+    void subtractMatrix(Matrix &argMatrix)
     {
+        vector<vector<int>> arg = argMatrix.getMatrix();
         if (matrix.size() == 0)
         {
             matrix = arg;
@@ -102,9 +107,9 @@ public:
         {
             return;
         }
-        if (matrix.size() != arg.size() || matrix[0].size() != arg.size())
+        if (matrix.size() != arg.size() || matrix[0].size() != arg[0].size())
         {
-            cout << "Error: Addition not possible, dimensions does not match\n";
+            cout << "Error: Subtraction not possible, dimensions does not match\n";
             return;
         }
 
@@ -114,7 +119,7 @@ public:
         {
             for (int col = 0; col < colSize; col++)
             {
-                matrix[row][col] += arg[row][col];
+                matrix[row][col] -= arg[row][col];
             }
         }
     }
@@ -152,53 +157,27 @@ public:
         matrix = tempVec;
     }
 
-    //Overloaded
-    void multiplyMatrix(vector<vector<int>> &arg)
+    bool isEqual(const Matrix &arg)
     {
-        if (matrix.size() == 0 || matrix[0].size() == 0 || arg.size() == 0 || arg[0].size() == 0)
-        {
-            cout << "Error: multiplication not possible, some dimension is zero\n";
-            return;
-        }
-
-        int rowSize = matrix.size(), colSize = matrix[0].size();
-        int argRowSize = arg.size(), argColSize = arg[0].size();
-
-        if (colSize != argRowSize)
-        {
-            cout << "Error: multiplication not possible, row size of first matrix must be equal to col size of second matrix\n";
-            return;
-        }
-
-        vector<vector<int>> tempVec(rowSize, vector<int>(argColSize, 0));
-
-        for (int rowA = 0; rowA < rowSize; rowA++)
-        {
-            for (int colB = 0; colB < argColSize; colB++)
-            {
-                for (int temp = 0; temp < colSize; temp++)
-                {
-                    tempVec[rowA][colB] += matrix[rowA][temp] * arg[temp][colB];
-                }
-            }
-        }
-        matrix = tempVec;
+        return this->matrix == arg.matrix;
     }
 
-    bool operator == (const Matrix& arg)
+    bool operator==(const Matrix &arg)
     {
-        return this->matrix==arg.matrix;
-    }  
+        return this->matrix == arg.matrix;
+    }
 };
 
 int main()
 {
-    Matrix m({{2, 4}, {3, 4}});
-    Matrix m2(m);
-    Matrix m3=m;
+    Matrix m, m2;
+    vector<vector<int>> v = {{1, 2, 3}, {4, 5, 6}};
+    m = v;
+    v={{2,2,2},{2,2,2}};
+    m2=v;
     m.printMatrix();
-    m2.printMatrix();
-    m3.printMatrix();
+    m.subtractMatrix(m2);
+    m.printMatrix();
     /*
 {
   { 2, 4 },
