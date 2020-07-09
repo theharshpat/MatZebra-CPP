@@ -166,30 +166,28 @@ public:
     {
         return this->matrix == arg.matrix;
     }
+
+    void setIdentity(int size)
+    {
+        matrix.resize(size,vector<int>(size,0));
+        for(int row=0;row<size;row++)
+        {
+            matrix[row][row]=1;
+        }
+    }
 };
 
 int main()
 {
-    Matrix m, m2;
-    vector<vector<int>> v = {{1, 2, 3}, {4, 5, 6}};
-    m = v;
-    v={{2,2,2},{2,2,2}};
-    m2=v;
+    Matrix m;
+    m.setIdentity(4);
     m.printMatrix();
-    m.subtractMatrix(m2);
-    m.printMatrix();
-    /*
+/*
 {
-  { 2, 4 },
-  { 3, 4 }
-}
-{
-  { 2, 4 },
-  { 3, 4 }
-}
-{
-  { 2, 4 },
-  { 3, 4 }
+  { 1, 0, 0, 0 },
+  { 0, 1, 0, 0 },
+  { 0, 0, 1, 0 },
+  { 0, 0, 0, 1 }
 }
 */
     return 0;
